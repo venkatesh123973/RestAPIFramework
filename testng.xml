@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="RestAPI">
+    <listeners>
+        <listener class-name="org.listeners.ReportListener"></listener>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="RestAPITest">
+        <classes>
+            <class name="org.tests.BookingAPI"/>
+            <class name="org.tests.BookingAPIUsingConsPOJO"/>
+            <class name="org.tests.BookingAPIUSingPOJOwithoutCons"/>
+            <class name="org.tests.BookingAPIusingPOJO"/>
+
+        </classes>
+    </test>
+</suite>
