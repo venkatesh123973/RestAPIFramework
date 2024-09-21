@@ -3,8 +3,10 @@ package org.Base;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.config.configmanager;
 import org.specs.requestSpecification;
 import org.testng.annotations.BeforeClass;
+import org.utilities.JsonUtils;
 
 import java.util.Map;
 
@@ -15,6 +17,32 @@ public class baseTest {
     public void setup() {
         System.out.println("Setting up the baseclass");
         reqspec = requestSpecification.spec();
+        generateToken();
+    }
+
+    public static void generateToken(){
+        boolean regenerate=Boolean.parseBoolean(configmanager.getKey("regenerate"));
+        String currentToken=configmanager.getKey("token");
+
+        if(regenerate||currentToken==null && currentToken.equalsIgnoreCase("null")&& currentToken.isEmpty()){
+        RequestSpecification req= requestSpecification.spec().basePath("/auth").body("{\n" +
+                 "    \"username\" : \"admin\",\n" +
+                 "    \"password\" : \"password123\"\n" +
+                 "}");
+
+        Response resp=RestAssured.given().spec(req).post();
+            String tokenvalue=JsonUtils.getString(resp,"token");
+            if(tokenvalue!=null){
+                configmanager.updatedpropertyfile("token",tokenvalue);
+            }
+            else{
+                System.out.println("Fail to generate new token");
+            }
+        }
+
+        else{
+            System.out.println("Token Present in the Config file reuse the same");
+        }
     }
 
 

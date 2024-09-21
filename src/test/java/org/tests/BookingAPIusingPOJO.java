@@ -2,6 +2,7 @@ package org.tests;
 
 import io.restassured.response.Response;
 import org.Base.baseTest;
+import org.config.configmanager;
 import org.model.Booking;
 import org.specs.responseSpecification;
 import org.testng.Assert;
@@ -44,8 +45,7 @@ public class BookingAPIusingPOJO extends baseTest {
     public void deleteBooking() {
 
         Map<String, Object> headers = new HashMap<>();
-        headers.put("Authorization", "Basic YWRtaW46cGFzc3dvcmQxMjM=");
-
+        headers.put("Cookie", "token=" + configmanager.getKey("token"));
         Response resp = sendrequest("DELETE", "/booking/" + bookingID, null, headers);
         System.out.println(resp.asPrettyString());
         resp.then().spec(responseSpecification.response_spec_201());

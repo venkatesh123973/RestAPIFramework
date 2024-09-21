@@ -9,9 +9,15 @@ import org.config.configmanager;
 public class requestSpecification {
 
     public static RequestSpecification spec() {
+        boolean requestlogs=Boolean.parseBoolean(configmanager.getKey("requestlogs"));
 
-        return new RequestSpecBuilder()
-                .setBaseUri(configmanager.getKey("baseURL")).setContentType(ContentType.JSON).log(LogDetail.ALL).build();
-
+            RequestSpecBuilder requestSpecBuilder= new RequestSpecBuilder()
+                    .setBaseUri(configmanager.getKey("baseURL")).setContentType(ContentType.JSON);
+        if(requestlogs==true) {
+                    requestSpecBuilder.log(LogDetail.ALL);
+        }
+       return requestSpecBuilder.build();
     }
+
+
 }

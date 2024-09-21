@@ -1,11 +1,22 @@
 package org.utilities;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
 
 import java.util.List;
 import java.util.Map;
 
 public class JsonUtils {
+    private static ObjectMapper mapper=new ObjectMapper();
+    public static <T> T deserailize(Response resp,Class<T> cls){
+        try {
+            return mapper.readValue(resp.asPrettyString(),cls);
+        } catch (JsonProcessingException e) {
+            System.out.println("Exception while parsing"+ e.getMessage());
+            return null;
+        }
+    }
 
     public static String getString(Response resp, String jsonpath) {
         String value = resp.jsonPath().getString(jsonpath);

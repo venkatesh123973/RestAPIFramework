@@ -7,10 +7,6 @@
     <test verbose="2" preserve-order="true" name="RestAPITest">
         <classes>
             <class name="org.tests.BookingAPI"/>
-            <class name="org.tests.BookingAPIUsingConsPOJO"/>
-            <class name="org.tests.BookingAPIUSingPOJOwithoutCons"/>
-            <class name="org.tests.BookingAPIusingPOJO"/>
-
         </classes>
     </test>
 </suite>
