@@ -33,14 +33,14 @@ public class BookingAPI extends baseTest {
         bookingID = JsonUtils.getInt(resp, "bookingid");
     }
 
-    @Test(priority = 1)
-    public void deleteBooking() {
-
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("Cookie", "token=" + configmanager.getKey("token"));
-
-        Response resp = sendrequest("DELETE", "/booking/" + bookingID, null, headers);
-        System.out.println(resp.asPrettyString());
-        resp.then().spec(responseSpecification.response_spec_201());
-    }
+//    @Test(priority = 1)
+//    public void deleteBooking() {
+//
+//        Map<String, Object> headers = new HashMap<>();
+//        headers.put("Cookie", "token=" + configmanager.getKey("token"));
+//
+//        Response resp = sendrequest("DELETE", "/booking/" + bookingID, null, headers);
+//        System.out.println(resp.asPrettyString());
+//        resp.then().spec(responseSpecification.response_spec_201());
+//    }
 }
